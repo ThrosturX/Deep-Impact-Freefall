@@ -29,7 +29,7 @@ void Ship::release()
 void Ship::update()
 {
 	if (accelerating) {
-		float radians = (PI * angle) / 180;
+		double radians = (PI * angle) / 180;
 
 		Vector2D angle_vector;
 

@@ -12,7 +12,7 @@ public:
 	void render(Entity item);
 	void render(Entity item, SDL_Rect *clip);
 
-private:
+protected:
 	Window *window;
 };
 

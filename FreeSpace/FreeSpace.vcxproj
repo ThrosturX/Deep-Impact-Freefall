@@ -91,10 +91,13 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Celestial.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="1Window.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="SpaceScene.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -105,10 +108,13 @@
     <None Include="lib\SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Celestial.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="1Window.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="SpaceScene.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
