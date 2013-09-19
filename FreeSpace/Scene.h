@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "Entity.h"
 
 class Scene
 {
@@ -8,7 +9,8 @@ public:
 	Scene(Window *_window);
 	~Scene(void);
 	
-	void render();
+	void render(Entity item);
+	void render(Entity item, SDL_Rect *clip);
 
 private:
 	Window *window;

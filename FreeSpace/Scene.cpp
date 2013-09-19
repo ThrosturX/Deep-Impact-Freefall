@@ -12,6 +12,10 @@ Scene::~Scene(void)
 
 }
 
-void Scene::render() {
+void Scene::render(Entity item) {
+	render(item, NULL);
+}
 
+void Scene::render(Entity item, SDL_Rect *clip) {
+	window->draw( item.getImage(), item.getCoordinates(), clip, item.getAngle() );
 }
