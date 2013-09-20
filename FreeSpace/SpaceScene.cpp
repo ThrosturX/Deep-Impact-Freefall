@@ -11,6 +11,13 @@ SpaceScene::~SpaceScene(void)
 {
 }
 
+void SpaceScene::initialize()
+{
+	// load stars as background
+	star = new Image();
+	star->open("star.png", window->getRenderer());
+}
+
 std::deque<Celestial> *SpaceScene::getCelestials()
 {
 	return celestials;
@@ -46,4 +53,14 @@ void SpaceScene::render(Celestial celestial)
 	position.y += displacement.y;
 
 	window->draw( celestial.getImage(), position, NULL, celestial.getAngle() );
+}
+
+void SpaceScene::render_background()
+{
+	std::vector<SDL_Point> *stars = starfield.getStarPoints(  );
+	/* /// broken!
+	for (auto p = begin(*stars); p < end(*stars); ++p) {
+		SDL_Point loc = { p->x - displacement.x, p->y - displacement.y };
+		window->draw(star, loc, NULL, 0.0F );
+	}*/
 }

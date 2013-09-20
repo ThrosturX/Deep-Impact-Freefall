@@ -1,5 +1,15 @@
 #include "Entity.h"
 
+Vector2D::Vector2D()
+{
+	// intentionally empty
+}
+
+Vector2D::Vector2D(SDL_Point p)
+{
+	x = p.x;
+	y = p.y;
+}
 
 Entity::Entity(void)
 {
@@ -16,7 +26,10 @@ float Entity::getAngle() {
 }
 
 SDL_Point Entity::getCoordinates() {
-	return coordinates;
+	SDL_Point p;
+	p.x = (int) coordinates.x;
+	p.y = (int) coordinates.y;
+	return p;
 }
 
 Image *Entity::getImage() {
@@ -31,7 +44,7 @@ void Entity::setAngle(float _angle) {
 	angle = _angle;
 }
 
-void Entity::setCoordinates(SDL_Point _coordinates) {
+void Entity::setCoordinates(Vector2D _coordinates) {
 	coordinates = _coordinates;
 }
 

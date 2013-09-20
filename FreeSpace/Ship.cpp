@@ -3,6 +3,9 @@
 
 Ship::Ship(void)
 {
+	turning_direction = STOP;
+
+	turning_speed = 3;
 	acceleration = 0.1F;
 	max_velocity = 50;
 
@@ -26,6 +29,11 @@ void Ship::release()
 	accelerating = false;
 }
 
+
+void Ship::turn(DIR_ANGLE dir) {
+	turning_direction = dir;
+}
+
 void Ship::update()
 {
 	if (accelerating) {
@@ -44,9 +52,12 @@ void Ship::update()
 	// move the ship one unit according to it's vector
 	coordinates.x += ship_vector.x;
 	coordinates.y += ship_vector.y;
+
+	setAngle(angle + turning_speed * turning_direction);
 }
 
 float Ship::getVelocity()
 {
+	// TODO!
 	return 2;
 }

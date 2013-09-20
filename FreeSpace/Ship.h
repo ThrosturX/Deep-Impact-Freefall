@@ -13,6 +13,7 @@ public:
 
 	void accelerate();
 	void release();
+	void turn(DIR_ANGLE direction);
 	void update();
 
 private:
@@ -20,6 +21,7 @@ private:
 
 	bool accelerating;
 	Vector2D ship_vector;
+	DIR_ANGLE turning_direction;
 	float acceleration;
 	float max_velocity;
 	float turning_speed;
