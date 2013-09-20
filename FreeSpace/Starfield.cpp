@@ -1,31 +1,42 @@
 #include "Starfield.h"
-
-Starfield::Starfield() {
-	Starfield(10000);
-}
-
 Starfield::Starfield(int size)
 {
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int> distribution( -size, size);
+	// initialize the vectors
 	stars = new std::vector<SDL_Point>();
-	for (int i=0; i < size / 100; ++i) {
+	parallax = new std::vector<SDL_Point>();
+
+	for (int i=0; i < size ; ++i) {
 		SDL_Point p;
 		p.x = distribution(generator);
 		p.y = distribution(generator);
 		stars->push_back(p);
+		p.y = distribution(generator);
+		p.x = distribution(generator);
+		parallax->push_back(p);
 	}
 }
 
+void Starfield::initialize(int size)
+{
+
+}
 
 Starfield::~Starfield(void)
 {
 }
 
-std::vector<SDL_Point> *Starfield::getStarPoints()
+std::vector<SDL_Point> Starfield::getStarPoints()
 {
-	return stars;
+	return *stars;
 }
+
+std::vector<SDL_Point> Starfield::getParallax()
+{
+	return *parallax;
+}
+
 /*
 std::vector<SDL_Point> Starfield::getStarPoints(SDL_Point center)
 {

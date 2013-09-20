@@ -25,7 +25,8 @@ private:
 	std::deque<Celestial> *celestials;
 	SDL_Point displacement;
 	void initialize();
-	Starfield starfield;
+	Starfield *starfield;
 	Image *star;
+	Image *small_star;
 };
 

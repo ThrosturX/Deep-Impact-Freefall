@@ -23,7 +23,7 @@ private:
 	Vector2D ship_vector;
 	DIR_ANGLE turning_direction;
 	float acceleration;
-	float max_velocity;
+	double max_velocity;
 	float turning_speed;
 };
 

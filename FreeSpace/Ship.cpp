@@ -6,8 +6,8 @@ Ship::Ship(void)
 	turning_direction = STOP;
 
 	turning_speed = 3;
-	acceleration = 0.1F;
-	max_velocity = 50;
+	acceleration = 0.0375;
+	max_velocity = 300;
 
 	ship_vector.x = 0;
 	ship_vector.y = 0;
@@ -48,7 +48,6 @@ void Ship::update()
 		ship_vector.x += angle_vector.x * acceleration;
 		ship_vector.y -= angle_vector.y * acceleration;
 	} // else decelerate slightly? We'll see...
-
 	// move the ship one unit according to it's vector
 	coordinates.x += ship_vector.x;
 	coordinates.y += ship_vector.y;

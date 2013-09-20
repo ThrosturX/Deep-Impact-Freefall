@@ -3,7 +3,11 @@
 
 SpaceScene::SpaceScene(Window *window) : Scene(window)
 {
+	displacement.x =
+	displacement.y = 0;
+	starfield = new Starfield();
 	celestials = new std::deque<Celestial>();
+	initialize();
 }
 
 
@@ -15,7 +19,9 @@ void SpaceScene::initialize()
 {
 	// load stars as background
 	star = new Image();
-	star->open("star.png", window->getRenderer());
+	star->open("res/star.png", window->getRenderer());
+	small_star = new Image();
+	small_star->open("res/star_far.png", window->getRenderer());
 }
 
 std::deque<Celestial> *SpaceScene::getCelestials()
@@ -49,18 +55,36 @@ void SpaceScene::render(Celestial celestial)
 
 	position = celestial.getCoordinates();
 
-	position.x += displacement.x;
-	position.y += displacement.y;
+	position.x += displacement.x * 1.05;
+	position.y += displacement.y * 1.05;
 
 	window->draw( celestial.getImage(), position, NULL, celestial.getAngle() );
 }
 
 void SpaceScene::render_background()
 {
-	std::vector<SDL_Point> *stars = starfield.getStarPoints(  );
-	/* /// broken!
-	for (auto p = begin(*stars); p < end(*stars); ++p) {
+	Celestial c;
+	c.setImage(star);
+	std::vector<SDL_Point> stars = starfield->getStarPoints(  );
+
+	 /// broken!
+	/*for (auto p = begin(*stars); p < end(*stars); ++p) {
 		SDL_Point loc = { p->x - displacement.x, p->y - displacement.y };
-		window->draw(star, loc, NULL, 0.0F );
+	//	window->draw(star, loc, NULL, 0.0F );
 	}*/
+
+	SDL_Point loc;
+
+	for (int i=0; i< stars.size(); ++i) {
+		loc.x = displacement.x * 0.19 - stars.at(i).x;
+		loc.y = displacement.y * 0.19 - stars.at(i).y;
+		window->draw(star, loc, NULL, 70.0F);
+	}
+	
+	stars = starfield->getParallax();
+	for (int i=0; i< stars.size(); ++i) {
+		loc.x = displacement.x * 0.165 - stars.at(i).x;
+		loc.y = displacement.y * 0.165 - stars.at(i).y;
+		window->draw(small_star, loc, NULL, 15.5F);
+	}
 }

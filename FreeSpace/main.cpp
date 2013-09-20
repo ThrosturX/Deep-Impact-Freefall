@@ -64,10 +64,10 @@ int main(int argc, char** argv){
 						ship.accelerate();
 						break;
 					case SDLK_LEFT:
-						ship.adjustAngle(-4);
+						ship.turn(LEFT);
 						break;
 					case SDLK_RIGHT:
-						ship.adjustAngle(4);
+						ship.turn(RIGHT);
 						break;
 				}
 			}
@@ -76,11 +76,16 @@ int main(int argc, char** argv){
 					case SDLK_UP:
 						ship.release();
 						break;
+					case SDLK_LEFT:
+					case SDLK_RIGHT:
+						ship.turn(STOP);
+						break;
 				}
 			}
 		}
 
 		window->clear();
+		scene.render_background();
 		scene.render(planet);	// for now; this will change and be handled by SpaceScene
 		ship.update();
 		scene.render(ship);
