@@ -51,35 +51,6 @@ void SpaceScene::render(Celestial celestial)
 
 	window->draw( celestial.getImage(), position, NULL, celestial.getAngle() );
 }
-
-void SpaceScene::render_background()
-{
-	Celestial c;
-	c.setImage(star);
-	std::vector<SDL_Point> stars = starfield->getStarPoints(  );
-
-	 /// broken!
-	for (auto p = begin(stars); p < end(stars); ++p) {
-		SDL_Point loc = { displacement.x - p->x , displacement.y - p->y };
-		window->draw(star, loc, NULL, 0.0F );
-	}
-
-	SDL_Point loc;
-
-	for (unsigned int i=0; i< stars.size(); ++i) {
-		loc.x = (int) (displacement.x * 0.19 - stars.at(i).x );
-		loc.y = (int) (displacement.y * 0.19 - stars.at(i).y );
-	//	window->draw(star, loc, NULL, 70.0F);
-	}
-	
-	stars = starfield->getParallax();
-	for (unsigned int i=0; i< stars.size(); ++i) {
-		loc.x = (int) (displacement.x * 0.165 - stars.at(i).x );
-		loc.y = (int) (displacement.y * 0.165 - stars.at(i).y );
-		window->draw(small_star, loc, NULL, 15.5F);
-	}
-}
-
 void SpaceScene::render_starscape()
 {
 	starscape->draw();
@@ -101,6 +72,8 @@ void SpaceScene::render()
 
 	// allies
 
+	// projectiles
+
 	// enemies
 
 	// finally, render the player
@@ -108,4 +81,9 @@ void SpaceScene::render()
 	render(protagonist->ship);
 
 	window->present();
+}
+
+SDL_Point SpaceScene::getDisplacement()
+{
+	return displacement;
 }

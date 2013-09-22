@@ -21,12 +21,13 @@ Ship::Ship(void)
 	turning_direction = STOP;
 
 	turning_speed = 3;
-	acceleration = 0.0575;
-	max_velocity = 10;
+	acceleration = 0.0975;
+	max_velocity = 5;
 
 	ship_vector.x = 0;
 	ship_vector.y = 0;
 	accelerating = false;
+	autopilot = false;
 }
 
 
@@ -44,6 +45,10 @@ void Ship::release()
 	accelerating = false;
 }
 
+void Ship::disableAP()
+{
+	autopilot = false;
+}
 
 void Ship::turn(DIR_ANGLE dir) {
 	if (dir == REVERSE) {
@@ -62,17 +67,51 @@ void Ship::turn(DIR_ANGLE dir) {
 		if (targetAngle - angle > 0)
 			turning_direction = RIGHT;
 		else turning_direction = LEFT;
-		
-
-
-
 	} else {
 		turning_direction = dir;
 	}
 }
 
+void Ship::turn(Entity *ent)
+{
+	if (ent == nullptr) return;
+	autopilot = true;
+	Vector2D direction;
+	direction.x = ent->getCoordinates().x + coordinates.x;
+	direction.y = ent->getCoordinates().y + coordinates.y;
+
+	double targetAngle = atan2(direction.y, direction.x);
+
+	// convert velocityAngle to degrees
+	targetAngle *= 180 / PI;
+	targetAngle += 270;
+
+	if (targetAngle >= 360)
+		targetAngle -= 360;
+
+	if (abs(round(angle) - round(targetAngle)) < 2 ) {
+		turning_direction = STOP;
+		return;
+	}
+
+	int shortestAngle = static_cast<int>(targetAngle - angle);
+
+	if (shortestAngle > 180)
+		shortestAngle -= 360;
+	else if (shortestAngle < -180)
+		shortestAngle += 360;
+
+	if (shortestAngle > 0)
+		turning_direction = RIGHT;
+	else turning_direction = LEFT;
+}
+
 void Ship::update()
 {
+	if (autopilot) {
+		turn(selected_item);
+	}
+
 	if ((int)angle > 360.0)
 		angle -= 360;
 
@@ -100,6 +139,16 @@ void Ship::update()
 	coordinates.y += ship_vector.y;
 
 	setAngle(angle + turning_speed * turning_direction);
+}
+
+void Ship::setSelectedItem(Entity *item)
+{
+	selected_item = item;
+}
+
+Entity *Ship::getSelectedItem()
+{
+	return selected_item;
 }
 
 double Ship::getStopAngle()

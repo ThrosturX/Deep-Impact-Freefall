@@ -6,11 +6,14 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		dist|Win32 = dist|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{486D96AF-0C5F-4B8F-B128-5B55F305BAA9}.Debug|Win32.ActiveCfg = Debug|Win32
 		{486D96AF-0C5F-4B8F-B128-5B55F305BAA9}.Debug|Win32.Build.0 = Debug|Win32
+		{486D96AF-0C5F-4B8F-B128-5B55F305BAA9}.dist|Win32.ActiveCfg = dist|Win32
+		{486D96AF-0C5F-4B8F-B128-5B55F305BAA9}.dist|Win32.Build.0 = dist|Win32
 		{486D96AF-0C5F-4B8F-B128-5B55F305BAA9}.Release|Win32.ActiveCfg = Release|Win32
 		{486D96AF-0C5F-4B8F-B128-5B55F305BAA9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection

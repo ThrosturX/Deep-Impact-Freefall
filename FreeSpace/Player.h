@@ -20,6 +20,5 @@ public:
 	}
 
 	Ship ship;
-	Entity selected_item;
 };
 

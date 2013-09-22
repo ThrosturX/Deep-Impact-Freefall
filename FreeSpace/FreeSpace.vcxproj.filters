@@ -36,9 +36,6 @@
     <ClCompile Include="Ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Starfield.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Starscape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\SDL2.dll" />
+    <None Include="lib\libpng16-16.dll" />
+    <None Include="lib\zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -70,9 +69,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Starfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector2D.h">

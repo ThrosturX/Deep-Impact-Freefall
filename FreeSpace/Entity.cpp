@@ -36,6 +36,11 @@ Image *Entity::getImage() {
 	return image;
 }
 
+std::string Entity::getName()
+{
+	return name;
+}
+
 void Entity::adjustAngle(double adjustment) {
 	angle += adjustment;
 }

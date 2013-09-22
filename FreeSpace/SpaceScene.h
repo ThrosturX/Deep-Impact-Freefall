@@ -4,7 +4,6 @@
 #include "scene.h"
 #include "celestial.h"
 #include "Player.h"
-#include "Starfield.h"
 #include "Starscape.h"
 
 class SpaceScene :
@@ -24,11 +23,12 @@ public:
 	void render_starscape();
 	void render();
 
+	SDL_Point getDisplacement();
+
 private:
 	std::deque<Celestial> *celestials;
 	SDL_Point displacement;
 	void initialize();
-	Starfield *starfield;
 	Starscape *starscape;
 	Image *star;
 	Image *small_star;

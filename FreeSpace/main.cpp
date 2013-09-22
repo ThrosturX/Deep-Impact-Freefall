@@ -39,15 +39,22 @@ int main(int argc, char** argv){
 	planet.setImage(png_planet);
 	planet.setAngle(26.5);
 
+	center.x = 150;
+	center.y = -100;
+	png_planet = new Image();
+	png_planet->open("res/moon.png", window->getRenderer());
+	png_planet->setSize(100, 100);
+	Celestial moon;
+	moon.setName("Luna");
+	moon.setCoordinates(center);
+	moon.setImage(png_planet);
+	moon.setAngle(-15.0);
 
-	/**/
 	SpaceScene scene(window, player);
 	scene.addCelestial(planet);
-
+	scene.addCelestial(moon);
 	/// TODO: Move into a controls handler
 
-	std::cout << "Loading... complete?" << std::endl;
-	
 	SDL_Event e;
 	bool quit = false;
 	while(!quit) {
@@ -61,6 +68,9 @@ int main(int argc, char** argv){
 					case SDLK_ESCAPE:
 						quit = true;
 						break;
+					case SDLK_a:
+						player->ship.turn(player->ship.getSelectedItem());
+						break;
 					case SDLK_UP:
 						player->ship.accelerate();
 						break;
@@ -72,6 +82,12 @@ int main(int argc, char** argv){
 						break;
 					case SDLK_DOWN:
 						player->ship.turn(REVERSE);
+						break;
+					case SDLK_l:
+						player->ship.setSelectedItem(&( scene.getCelestials()->at(0)));
+						//std::cout << "l ";
+						//std::cout << player->ship.getSelectedItem()->getName() << std::endl;
+						break;
 				}
 			}
 			else if (e.type == SDL_KEYUP) {
@@ -79,6 +95,8 @@ int main(int argc, char** argv){
 					case SDLK_UP:
 						player->ship.release();
 						break;
+					case SDLK_a:
+						player->ship.disableAP();
 					case SDLK_LEFT:
 					case SDLK_RIGHT:
 					case SDLK_DOWN:
