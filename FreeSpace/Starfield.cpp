@@ -37,30 +37,36 @@ std::vector<SDL_Point> Starfield::getParallax()
 	return *parallax;
 }
 
-/*
+
 std::vector<SDL_Point> Starfield::getStarPoints(SDL_Point center)
 {
 	SDL_Point tl = { center.x - 500, center.y - 500 };
 	SDL_Point br = { center.x + 500, center.y + 500 };
 
 	std::vector<SDL_Point> v;
+	/*
+	std::vector<SDL_Point>::iterator partition_end = Vector2D::start(*stars, tl, br);
 
-	std::vector<Vector2D>::iterator partition_end = Vector2D::start(stars, tl, br);
-
-	Vector2D tl, br;
+	SDL_Point tl, br;
 	tl.x = center.x - 500;
 	tl.y = center.y - 500;
 	br.x = center.x + 500;
 	br.y = center.y + 500;
+	*/
+	SDL_Rect *view = new SDL_Rect();
+	view->x = center.x - 500;
+	view->y = center.y - 500;
+	view->h = 1000;
+	view->w = 1000;
 
-	auto partition_end = std::stable_partition(begin(stars), end(stars), [tl, br](const Vector2D &p) { return p > tl && p < br; });
+	auto partition_end = std::stable_partition(begin(*stars), end(*stars), [view](const SDL_Point &p) { return SDL_EnclosePoints(&p, 1, NULL, view); });
 
-	std::vector<SDL_Point> v;
+//	std::vector<SDL_Point> v;
 
-	for (std::vector<Vector2D>::iterator p = begin(stars); p < partition_end; ++p) {
+	for (std::vector<SDL_Point>::iterator p = begin(*stars); p < partition_end; ++p) {
 		SDL_Point visible_star = { (int) p->x, (int) p->y };
 		v.push_back(visible_star);
 	}
 
 	return v;
-}*/
+}

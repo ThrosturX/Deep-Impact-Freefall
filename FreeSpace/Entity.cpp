@@ -22,7 +22,7 @@ Entity::~Entity(void)
 }
 
 float Entity::getAngle() {
-	return angle;
+	return static_cast<float>(angle);
 }
 
 SDL_Point Entity::getCoordinates() {
@@ -36,11 +36,11 @@ Image *Entity::getImage() {
 	return image;
 }
 
-void Entity::adjustAngle(float adjustment) {
+void Entity::adjustAngle(double adjustment) {
 	angle += adjustment;
 }
 
-void Entity::setAngle(float _angle) {
+void Entity::setAngle(double _angle) {
 	angle = _angle;
 }
 

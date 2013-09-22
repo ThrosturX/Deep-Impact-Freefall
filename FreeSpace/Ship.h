@@ -16,14 +16,16 @@ public:
 	void turn(DIR_ANGLE direction);
 	void update();
 
+	double getStopAngle();
+
 private:
-	float getVelocity();
+	double getVelocity();
 
 	bool accelerating;
 	Vector2D ship_vector;
 	DIR_ANGLE turning_direction;
-	float acceleration;
+	double acceleration;
 	double max_velocity;
-	float turning_speed;
+	double turning_speed;
 };
 

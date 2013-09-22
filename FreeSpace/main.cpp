@@ -18,19 +18,18 @@ int main(int argc, char** argv){
 	Window *window = new Window("FreeSpace");
 
 	SDL_Point center = {0, 0};
-	
 
-	Image *image = new Image();
-	image->open("res/triangle.bmp", window->getRenderer());
 	Image *png_ship = new Image();
-	png_ship->open("res/ship.png", window->getRenderer());
+	png_ship->open("res/rom.png", window->getRenderer());
 	
+	Player *player = new Player(png_ship);
+
 	Ship ship;
 
 	ship.setName("Player");
 	ship.setCoordinates( center );
 	ship.setImage(png_ship);
-	ship.setAngle(0.0F);
+	ship.setAngle(0.0);
 
 	Image *png_planet = new Image();
 	png_planet->open("res/planet.png", window->getRenderer());
@@ -38,14 +37,16 @@ int main(int argc, char** argv){
 	planet.setName("Earth");
 	planet.setCoordinates( center );
 	planet.setImage(png_planet);
-	planet.setAngle(20.0);
+	planet.setAngle(26.5);
 
 
 	/**/
-	SpaceScene scene(window);
+	SpaceScene scene(window, player);
 	scene.addCelestial(planet);
 
-	// TODO: check the physics behavior
+	/// TODO: Move into a controls handler
+
+	std::cout << "Loading... complete?" << std::endl;
 	
 	SDL_Event e;
 	bool quit = false;
@@ -61,36 +62,33 @@ int main(int argc, char** argv){
 						quit = true;
 						break;
 					case SDLK_UP:
-						ship.accelerate();
+						player->ship.accelerate();
 						break;
 					case SDLK_LEFT:
-						ship.turn(LEFT);
+						player->ship.turn(LEFT);
 						break;
 					case SDLK_RIGHT:
-						ship.turn(RIGHT);
+						player->ship.turn(RIGHT);
 						break;
+					case SDLK_DOWN:
+						player->ship.turn(REVERSE);
 				}
 			}
 			else if (e.type == SDL_KEYUP) {
 				switch (e.key.keysym.sym) {
 					case SDLK_UP:
-						ship.release();
+						player->ship.release();
 						break;
 					case SDLK_LEFT:
 					case SDLK_RIGHT:
-						ship.turn(STOP);
+					case SDLK_DOWN:
+						player->ship.turn(STOP);
 						break;
 				}
 			}
 		}
 
-		window->clear();
-		scene.render_background();
-		scene.render(planet);	// for now; this will change and be handled by SpaceScene
-		ship.update();
-		scene.render(ship);
-		//window->draw(image, center, NULL, 0.0F);
-		window->present();
+		scene.render();
 	}
 	
 	SDL_Quit();

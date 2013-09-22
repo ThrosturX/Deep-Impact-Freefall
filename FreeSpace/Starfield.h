@@ -11,7 +11,7 @@ public:
 
 	std::vector<SDL_Point> getStarPoints();
 	std::vector<SDL_Point> getParallax();
-	std::vector<SDL_Point> *getStarPoints(SDL_Point center);
+	std::vector<SDL_Point> getStarPoints(SDL_Point center);
 	// privatize...
 	std::vector<SDL_Point> *stars;
 	std::vector<SDL_Point> *parallax; // TODO

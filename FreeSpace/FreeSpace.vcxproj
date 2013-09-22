@@ -78,14 +78,15 @@
       <AdditionalIncludeDirectories>C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\FreeSpace\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\FreeSpace\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -99,6 +100,7 @@
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SpaceScene.cpp" />
     <ClCompile Include="Starfield.cpp" />
+    <ClCompile Include="Starscape.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -112,10 +114,13 @@
     <ClInclude Include="Celestial.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SpaceScene.h" />
     <ClInclude Include="Starfield.h" />
+    <ClInclude Include="Starscape.h" />
+    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

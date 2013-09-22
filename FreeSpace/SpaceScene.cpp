@@ -1,27 +1,18 @@
 #include "SpaceScene.h"
 
 
-SpaceScene::SpaceScene(Window *window) : Scene(window)
+SpaceScene::SpaceScene(Window *window, Player *player) : Scene(window)
 {
 	displacement.x =
 	displacement.y = 0;
-	starfield = new Starfield();
 	celestials = new std::deque<Celestial>();
-	initialize();
+	starscape = new Starscape(window, &displacement);
+	protagonist = player;
 }
 
 
 SpaceScene::~SpaceScene(void)
 {
-}
-
-void SpaceScene::initialize()
-{
-	// load stars as background
-	star = new Image();
-	star->open("res/star.png", window->getRenderer());
-	small_star = new Image();
-	small_star->open("res/star_far.png", window->getRenderer());
 }
 
 std::deque<Celestial> *SpaceScene::getCelestials()
@@ -55,8 +46,8 @@ void SpaceScene::render(Celestial celestial)
 
 	position = celestial.getCoordinates();
 
-	position.x += displacement.x * 1.05;
-	position.y += displacement.y * 1.05;
+	position.x += displacement.x /* * 1.05 */;
+	position.y += displacement.y /* * 1.05 */;
 
 	window->draw( celestial.getImage(), position, NULL, celestial.getAngle() );
 }
@@ -68,23 +59,53 @@ void SpaceScene::render_background()
 	std::vector<SDL_Point> stars = starfield->getStarPoints(  );
 
 	 /// broken!
-	/*for (auto p = begin(*stars); p < end(*stars); ++p) {
-		SDL_Point loc = { p->x - displacement.x, p->y - displacement.y };
-	//	window->draw(star, loc, NULL, 0.0F );
-	}*/
+	for (auto p = begin(stars); p < end(stars); ++p) {
+		SDL_Point loc = { displacement.x - p->x , displacement.y - p->y };
+		window->draw(star, loc, NULL, 0.0F );
+	}
 
 	SDL_Point loc;
 
-	for (int i=0; i< stars.size(); ++i) {
-		loc.x = displacement.x * 0.19 - stars.at(i).x;
-		loc.y = displacement.y * 0.19 - stars.at(i).y;
-		window->draw(star, loc, NULL, 70.0F);
+	for (unsigned int i=0; i< stars.size(); ++i) {
+		loc.x = (int) (displacement.x * 0.19 - stars.at(i).x );
+		loc.y = (int) (displacement.y * 0.19 - stars.at(i).y );
+	//	window->draw(star, loc, NULL, 70.0F);
 	}
 	
 	stars = starfield->getParallax();
-	for (int i=0; i< stars.size(); ++i) {
-		loc.x = displacement.x * 0.165 - stars.at(i).x;
-		loc.y = displacement.y * 0.165 - stars.at(i).y;
+	for (unsigned int i=0; i< stars.size(); ++i) {
+		loc.x = (int) (displacement.x * 0.165 - stars.at(i).x );
+		loc.y = (int) (displacement.y * 0.165 - stars.at(i).y );
 		window->draw(small_star, loc, NULL, 15.5F);
 	}
+}
+
+void SpaceScene::render_starscape()
+{
+	starscape->draw();
+}
+
+void SpaceScene::render()
+{
+	window->clear();
+
+	// render the stars in the background
+	render_starscape();
+
+	// celestials
+	for (std::deque<Celestial>::iterator it = begin(*celestials); it != end(*celestials); ++it) {
+		render(*it);
+	}
+
+	// any asteroids
+
+	// allies
+
+	// enemies
+
+	// finally, render the player
+	protagonist->ship.update();
+	render(protagonist->ship);
+
+	window->present();
 }
