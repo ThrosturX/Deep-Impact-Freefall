@@ -1,0 +1,13 @@
+*.suo
+*.sdf
+*.log
+*.lastbuildstate
+Debug/
+dist/
+*.obj
+*.tlog
+*.user
+*.pdb
+*.psess
+*.vsp
+*.opensdf

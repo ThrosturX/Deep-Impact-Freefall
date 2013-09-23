@@ -6,6 +6,9 @@
 #include "Window.h"
 #include "Celestial.h"
 #include "Ship.h"
+#include "PlayerControls.h"
+
+void engine_exit();
 
 int main(int argc, char** argv){
 
@@ -54,10 +57,15 @@ int main(int argc, char** argv){
 	scene.addCelestial(planet);
 	scene.addCelestial(moon);
 	/// TODO: Move into a controls handler
+/*
+	void (*end)();
+	end = &engine_exit;
+
+	PlayerControls flight();*/
 
 	SDL_Event e;
 	bool quit = false;
-	while(!quit) {
+	while (!quit) {
 		while (SDL_PollEvent(&e)){
 			if (e.type == SDL_QUIT) {
 				quit = true;
