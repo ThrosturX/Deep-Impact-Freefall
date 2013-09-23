@@ -130,6 +130,10 @@
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>robocopy "C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\FreeSpace\lib" "C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\Release" "zlib1.dll" "libpng16-16.dll" "SDL2.dll" "SDL2_image.dll"
+robocopy /E "$(SolutionDir)FreeSpace\res" "$(OutDir)res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Celestial.cpp" />

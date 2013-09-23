@@ -21,6 +21,9 @@ public:
 	void open(const std::string &file, SDL_Renderer *renderer) {
 		tex = IMG_LoadTexture(renderer, file.c_str());
 		SDL_QueryTexture(tex, NULL, NULL, &width, &height);
+
+		if (tex == NULL)
+			std::cerr << "Error loading image " << file.c_str() << ": " << SDL_GetError() << std::endl;
 	}
 
 	SDL_Texture* getTexture() { return tex; }
