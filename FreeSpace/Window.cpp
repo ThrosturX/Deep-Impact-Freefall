@@ -20,11 +20,13 @@ Window::~Window(void)
 {
 }
 
-SDL_Renderer *Window::getRenderer() {
+SDL_Renderer *Window::getRenderer()
+{
 	return renderer;
 }
 
-void Window::draw(Image *image, SDL_Point center, SDL_Rect *clip, float angle, SDL_RendererFlip flip) {
+void Window::draw(Image *image, SDL_Point center, SDL_Rect *clip, float angle, SDL_RendererFlip flip)
+{
 
 	SDL_Rect screen = getBox();
 
@@ -39,15 +41,29 @@ void Window::draw(Image *image, SDL_Point center, SDL_Rect *clip, float angle, S
 	SDL_RenderCopyEx(renderer, image->getTexture(), clip, &rect, angle, &pivot, flip); 
 }
 
-void Window::clear() {
+void Window::draw_absolute(Image *image, SDL_Point location, SDL_Rect *clip, float angle, SDL_RendererFlip flip)
+{
+	SDL_Rect rect;
+	rect.x = location.x - image->getWidth() / 2;
+	rect.y = location.y - image->getHeight() / 2;
+	rect.h = image->getHeight();
+	rect.w = image->getWidth();
+	
+	SDL_RenderCopyEx(renderer, image->getTexture(), clip, &rect, angle, NULL, flip);
+}
+
+void Window::clear()
+{
 	SDL_RenderClear(renderer);
 }
 
-void Window::present() {
+void Window::present()
+{
 	SDL_RenderPresent(renderer);
 }
 
-SDL_Rect Window::getBox() {
+SDL_Rect Window::getBox()
+{
 	SDL_GetWindowSize(window, &box.w, &box.h);
 	return box;
 }

@@ -63,6 +63,9 @@ void PlayerControls::activate()
 					ship->turn(STOP);
 				}
 			}
+			else if (e.type == SDL_MOUSEMOTION) {
+				scene->activateCursor();
+			}
 		}
 		scene->render();
 	}

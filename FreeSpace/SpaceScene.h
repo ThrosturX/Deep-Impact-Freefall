@@ -16,10 +16,12 @@ public:
 	std::deque<Celestial> *getCelestials();
 
 	void addCelestial(Celestial celestial);
+	void activateCursor();
 
 	void render(Ship *ship);
 	void render(Celestial celestial);
 	void render_arrow(SDL_Point location);
+	void render_cursor();
 	void render_starscape();
 	void render();
 
@@ -37,5 +39,6 @@ private:
 	Image *star;
 	Image *small_star;
 	Player *protagonist;
+	int cursor_frames;
 };
 

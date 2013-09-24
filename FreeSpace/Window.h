@@ -14,6 +14,7 @@ public:
 	SDL_Renderer *getRenderer();
 
 	void draw(Image *image, SDL_Point location, SDL_Rect *clip = NULL, float angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void draw_absolute(Image *image, SDL_Point location, SDL_Rect *clip = NULL, float angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	void clear();
 

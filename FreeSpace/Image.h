@@ -19,6 +19,7 @@ public:
 	}
 
 	void open(const std::string &file, SDL_Renderer *renderer) {
+		// TODO: check if this image already has a texture and destroy it if necessary.
 		tex = IMG_LoadTexture(renderer, file.c_str());
 		SDL_QueryTexture(tex, NULL, NULL, &width, &height);
 

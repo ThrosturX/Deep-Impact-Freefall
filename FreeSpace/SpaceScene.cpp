@@ -8,6 +8,9 @@ SpaceScene::SpaceScene(Window *window, Player *player) : Scene(window)
 	celestials = new std::deque<Celestial>();
 	starscape = new Starscape(window, &displacement);
 	protagonist = player;
+	cursor_frames = 0;
+	cursor->open("res/cursor.png", window->getRenderer());
+	SDL_ShowCursor(0);
 }
 
 
@@ -23,6 +26,12 @@ std::deque<Celestial> *SpaceScene::getCelestials()
 void SpaceScene::addCelestial(Celestial celestial)
 {
 	celestials->push_back(celestial);
+}
+
+void SpaceScene::activateCursor()
+{
+	SDL_SetTextureAlphaMod(cursor->getTexture(), static_cast<Uint8>(204));
+	cursor_frames = 0;
 }
 
 void SpaceScene::render(Ship *ship)
@@ -59,6 +68,21 @@ void SpaceScene::render_arrow(SDL_Point location)
 #endif
 }
 
+void SpaceScene::render_cursor()
+{
+	SDL_Point loc;
+	SDL_GetMouseState(&(loc.x), &(loc.y));
+
+	window->draw_absolute(cursor, loc);
+	if (cursor_frames > 90) {
+		Uint8 alpha;
+		SDL_GetTextureAlphaMod(cursor->getTexture(), &alpha);
+		if (alpha > 0) {
+			SDL_SetTextureAlphaMod(cursor->getTexture(), alpha-2);
+		}
+	}
+}
+
 void SpaceScene::render_starscape()
 {
 	starscape->draw();
@@ -92,6 +116,11 @@ void SpaceScene::render()
 	// finally, render the player
 	protagonist->getShip()->update();
 	render(protagonist->getShip());
+
+	// render the mouse, if it's on the screen
+	if (++cursor_frames < 300) {
+		render_cursor();
+	}
 
 	window->present();
 }

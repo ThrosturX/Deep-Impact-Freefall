@@ -4,6 +4,8 @@
 Scene::Scene(Window *_window)
 {
 	window = _window;
+	cursor = new Image();
+	cursor->open("res/ship.png", window->getRenderer());
 }
 
 

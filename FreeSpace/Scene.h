@@ -14,5 +14,6 @@ public:
 
 protected:
 	Window *window;
+	Image *cursor;
 };
 
