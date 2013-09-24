@@ -1,8 +1,8 @@
 #pragma once
 
 #include <deque>
-#include "scene.h"
-#include "celestial.h"
+#include "Scene.h"
+#include "Celestial.h"
 #include "Player.h"
 #include "Starscape.h"
 
@@ -17,13 +17,17 @@ public:
 
 	void addCelestial(Celestial celestial);
 
-	void render(Ship ship);
+	void render(Ship *ship);
 	void render(Celestial celestial);
-	void render_background();
+	void render_arrow(SDL_Point location);
 	void render_starscape();
 	void render();
 
 	SDL_Point getDisplacement();
+
+	Player *getProtagonist();
+
+	Celestial *getNearestCelestial();
 
 private:
 	std::deque<Celestial> *celestials;

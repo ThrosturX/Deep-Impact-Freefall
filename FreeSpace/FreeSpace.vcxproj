@@ -139,6 +139,7 @@ robocopy /E "$(SolutionDir)FreeSpace\res" "$(OutDir)res"</Command>
     <ClCompile Include="Celestial.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerControls.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SpaceScene.cpp" />
@@ -159,6 +160,7 @@ robocopy /E "$(SolutionDir)FreeSpace\res" "$(OutDir)res"</Command>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerControls.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SpaceScene.h" />

@@ -25,19 +25,19 @@ void SpaceScene::addCelestial(Celestial celestial)
 	celestials->push_back(celestial);
 }
 
-void SpaceScene::render(Ship ship)
+void SpaceScene::render(Ship *ship)
 { // this will in the future, be PlayerShip
 	static SDL_Point center = { 0, 0 };
 
 	// calculate displacement
 	// (translate ship's coordinates to 0, 0)
-	displacement = ship.getCoordinates();
+	displacement = ship->getCoordinates();
 
 	displacement.x *= -1;
 	displacement.y *= -1;
 
 	// render the ship
-	window->draw( ship.getImage(), center, NULL, ship.getAngle());
+	window->draw( ship->getImage(), center, NULL, ship->getAngle());
 }
 
 void SpaceScene::render(Celestial celestial)
@@ -51,6 +51,14 @@ void SpaceScene::render(Celestial celestial)
 
 	window->draw( celestial.getImage(), position, NULL, celestial.getAngle() );
 }
+
+void SpaceScene::render_arrow(SDL_Point location)
+{
+#if _DEBUG
+	std::cout << "Unimplemented: draw arrow towards center. Coordinates: " << location.x << ", " << location.y << std::endl;
+#endif
+}
+
 void SpaceScene::render_starscape()
 {
 	starscape->draw();
@@ -62,6 +70,11 @@ void SpaceScene::render()
 
 	// render the stars in the background
 	render_starscape();
+
+	// render directional arrow to center if far
+	SDL_Point coordinates = protagonist->getShip()->getCoordinates();
+	if (static_cast<int>(abs(coordinates.x)) > 2000  || static_cast<int>(abs(coordinates.y) > 2000))
+		render_arrow(coordinates);
 
 	// celestials
 	for (std::deque<Celestial>::iterator it = begin(*celestials); it != end(*celestials); ++it) {
@@ -77,8 +90,8 @@ void SpaceScene::render()
 	// enemies
 
 	// finally, render the player
-	protagonist->ship.update();
-	render(protagonist->ship);
+	protagonist->getShip()->update();
+	render(protagonist->getShip());
 
 	window->present();
 }
@@ -86,4 +99,16 @@ void SpaceScene::render()
 SDL_Point SpaceScene::getDisplacement()
 {
 	return displacement;
+}
+
+Player *SpaceScene::getProtagonist()
+{
+	return protagonist;
+}
+
+Celestial *SpaceScene::getNearestCelestial()
+{
+	//TODO: find nearest celestial
+
+	return &(celestials->at(0));
 }

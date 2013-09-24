@@ -57,12 +57,14 @@ int main(int argc, char** argv){
 	scene.addCelestial(planet);
 	scene.addCelestial(moon);
 	/// TODO: Move into a controls handler
-/*
+
 	void (*end)();
 	end = &engine_exit;
 
-	PlayerControls flight();*/
+	PlayerControls flight(end, &scene);
+	flight.activate();
 
+	/*
 	SDL_Event e;
 	bool quit = false;
 	while (!quit) {
@@ -113,11 +115,17 @@ int main(int argc, char** argv){
 				}
 			}
 		}
-
+		
 		scene.render();
 	}
-	
+	*/
 	SDL_Quit();
 
 	return 0;
+}
+
+void engine_exit()
+{
+	SDL_Quit();
+	exit(0);
 }

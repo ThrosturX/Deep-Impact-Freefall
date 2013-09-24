@@ -140,6 +140,9 @@ void Ship::update()
 	coordinates.x += ship_vector.x;
 	coordinates.y += ship_vector.y;
 
+	if (abs(coordinates.x) > 20000) { coordinates.x *= -1; }
+	if (abs(coordinates.y) > 20000) { coordinates.y *= -1; }
+
 	setAngle(angle + turning_speed * turning_direction);
 }
 

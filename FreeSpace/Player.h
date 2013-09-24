@@ -15,9 +15,9 @@ public:
 		ship.setAngle(0.0);
 	}
 
-	~Player(void)
-	{
-	}
+	~Player(void) { }
+
+	Ship *getShip() { return &ship; }
 
 	Ship ship;
 };
