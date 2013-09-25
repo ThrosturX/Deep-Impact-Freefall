@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
-#include "entity.h"
+#include "Entity.h"
+#include "di_util.h"
 
 #define PI 3.14159265
 

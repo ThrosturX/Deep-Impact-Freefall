@@ -11,6 +11,11 @@ SpaceScene::SpaceScene(Window *window, Player *player) : Scene(window)
 	cursor_frames = 0;
 	cursor->open("res/cursor.png", window->getRenderer());
 	SDL_ShowCursor(0);
+	
+	show_fps = false;
+	fps_count = new Text(window->getRenderer());
+	arrow = new Image();
+	arrow->open("res/arrow.png", window->getRenderer());
 }
 
 
@@ -32,6 +37,11 @@ void SpaceScene::activateCursor()
 {
 	SDL_SetTextureAlphaMod(cursor->getTexture(), static_cast<Uint8>(204));
 	cursor_frames = 0;
+}
+
+void SpaceScene::toggleFps()
+{
+	show_fps = !show_fps;
 }
 
 void SpaceScene::render(Ship *ship)
@@ -63,9 +73,20 @@ void SpaceScene::render(Celestial celestial)
 
 void SpaceScene::render_arrow(SDL_Point location)
 {
-#if _DEBUG
-	std::cout << "Unimplemented: draw arrow towards center. Coordinates: " << location.x << ", " << location.y << std::endl;
-#endif
+	static int rendered_times = 0;
+
+	if (rendered_times < 100) {
+		double angle = 270 + atan2(location.y, location.x) * 180 / PI;
+		SDL_Point center = {0, 0};
+		SDL_Rect rect = window->getBox();
+		SDL_Point pivot = { rect.w / 2, rect.h / 2};
+
+ 		window->draw_scaled(arrow, pivot, rect, NULL, static_cast<float>(angle));
+	} else if (rendered_times > 200) {
+		rendered_times = 0;
+	}
+
+	++rendered_times;
 }
 
 void SpaceScene::render_cursor()
@@ -81,6 +102,33 @@ void SpaceScene::render_cursor()
 			SDL_SetTextureAlphaMod(cursor->getTexture(), alpha-2);
 		}
 	}
+}
+
+void SpaceScene::render_fps()
+{
+	static SDL_Point location = { 30, 20 };
+	static time_t last = 0;
+	static int fps = -1;
+	static int frames = 1;
+
+	time_t now = SDL_GetTicks();
+	time_t dt = now - last;
+	if ( dt > 250) {
+		last = now;
+
+		if (dt) { // avoid division by zero
+			fps = util::round(frames * 1000 / static_cast<double>(dt));
+		}
+
+		std::string output = "fps: " + std::to_string(fps);
+
+		fps_count->setText(output);
+		frames = 1;
+	} else {
+		++frames;
+	}
+
+	window->draw_absolute(fps_count, location);
 }
 
 void SpaceScene::render_starscape()
@@ -120,6 +168,10 @@ void SpaceScene::render()
 	// render the mouse, if it's on the screen
 	if (++cursor_frames < 300) {
 		render_cursor();
+	}
+
+	if (show_fps) {
+		render_fps();
 	}
 
 	window->present();

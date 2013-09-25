@@ -3,8 +3,17 @@
 class Vector2D
 {
 public:
-	Vector2D();
-	Vector2D(SDL_Point p);
+	Vector2D()
+	{
+		// intentionally empty
+	}
+
+	Vector2D(SDL_Point p)
+	{
+		x = p.x;
+		y = p.y;
+	}
+
 
 	double x;
 	double y;

@@ -45,6 +45,8 @@ void PlayerControls::activate()
 				// TODO: Replace this with something mucho better
 				else if (action == DEF_ESCAPE) {
 					deactivate();
+				} else if (action == DEF_F) {
+					scene->toggleFps();
 				}
 
 				if (action == DEF_SPACE) {
@@ -82,6 +84,7 @@ void PlayerControls::assign()
 	// letters
 	DEF_A = SDLK_a;
 	DEF_B = SDLK_b;
+	DEF_F = SDLK_f;
 	DEF_J = SDLK_j;
 	DEF_L = SDLK_l;
 	DEF_P = SDLK_p;

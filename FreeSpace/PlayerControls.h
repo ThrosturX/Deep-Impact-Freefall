@@ -18,6 +18,7 @@ public:
 	SDL_Keycode DEF_RIGHT;
 	SDL_Keycode DEF_A; // accelerate
 	SDL_Keycode DEF_B; // board ...
+	SDL_Keycode DEF_F;
 	SDL_Keycode DEF_J;
 	SDL_Keycode DEF_L; // land
 	SDL_Keycode DEF_P;

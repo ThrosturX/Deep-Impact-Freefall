@@ -11,13 +11,6 @@ static inline void decreaseVector(Vector2D &direction) {
 	else direction.y += drag;
 }
 
-namespace fstools {
-	static inline int round(double d)
-	{
-		return static_cast<int>(d + 0.5);
-	}
-}
-
 Ship::Ship(void)
 {
 	turning_direction = STOP;
@@ -58,8 +51,8 @@ void Ship::turn(DIR_ANGLE dir) {
 
 		int a, t;
 
-		a = fstools::round(angle);
-		t = fstools::round(targetAngle);
+		a = util::round(angle);
+		t = util::round(targetAngle);
 
 		if (abs(a - t) < 2 || getVelocity() < 0.04) {
 			turning_direction = STOP;
@@ -91,7 +84,7 @@ void Ship::turn(Entity *ent)
 	if (targetAngle >= 360)
 		targetAngle -= 360;
 
-	if (abs(fstools::round(angle) - fstools::round(targetAngle)) < 2 ) {
+	if (abs(util::round(angle) - util::round(targetAngle)) < 2 ) {
 		turning_direction = STOP;
 		return;
 	}

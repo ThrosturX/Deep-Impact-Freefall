@@ -2,6 +2,7 @@
 #include <string>
 #include "SDL2/sdl.h"
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 #include "SpaceScene.h"
 #include "Window.h"
 #include "Celestial.h"
@@ -16,6 +17,11 @@ int main(int argc, char** argv){
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		SDL_Quit();
 		return -1;
+	}
+	if (TTF_Init() == -1){
+	 std::cout << TTF_GetError() << std::endl;
+		SDL_Quit();
+		return 2;
 	}
 
 	Window *window = new Window("FreeSpace");

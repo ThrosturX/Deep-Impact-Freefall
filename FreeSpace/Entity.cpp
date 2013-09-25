@@ -1,16 +1,5 @@
 #include "Entity.h"
 
-Vector2D::Vector2D()
-{
-	// intentionally empty
-}
-
-Vector2D::Vector2D(SDL_Point p)
-{
-	x = p.x;
-	y = p.y;
-}
-
 Entity::Entity(void)
 {
 	angle = 0.0F;

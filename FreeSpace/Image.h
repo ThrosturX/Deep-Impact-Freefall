@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include <iostream>
 
 // Simple wrapper class for using images
@@ -37,7 +37,7 @@ public:
 	int getWidth()  { return width;  }
 	int getHeight() { return height; }
 
-private:
+protected:
 	SDL_Texture *tex;
 	int width;
 	int height;

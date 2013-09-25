@@ -131,7 +131,7 @@
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>robocopy "C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\FreeSpace\lib" "C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\Release" "zlib1.dll" "libpng16-16.dll" "SDL2.dll" "SDL2_image.dll"
+      <Command>robocopy "C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\FreeSpace\lib" "C:\Users\Notandi\Documents\Dev\FreeSpace\FreeSpace\Release" "zlib1.dll" "libpng16-16.dll" "SDL2.dll" "SDL2_image.dll" "SDL2_ttf.dll" "libfreetype-6.dll" "msvcp110.dll"
 robocopy /E "$(SolutionDir)FreeSpace\res" "$(OutDir)res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -157,6 +157,7 @@ robocopy /E "$(SolutionDir)FreeSpace\res" "$(OutDir)res"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Celestial.h" />
+    <ClInclude Include="di_util.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Player.h" />
@@ -165,6 +166,7 @@ robocopy /E "$(SolutionDir)FreeSpace\res" "$(OutDir)res"</Command>
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SpaceScene.h" />
     <ClInclude Include="Starscape.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

@@ -25,7 +25,7 @@ SDL_Renderer *Window::getRenderer()
 	return renderer;
 }
 
-void Window::draw(Image *image, SDL_Point center, SDL_Rect *clip, float angle, SDL_RendererFlip flip)
+void Window::draw(Image *image, SDL_Point center, SDL_Rect *clip, float angle, SDL_RendererFlip flip, SDL_Point *origin)
 {
 
 	SDL_Rect screen = getBox();
@@ -37,6 +37,10 @@ void Window::draw(Image *image, SDL_Point center, SDL_Rect *clip, float angle, S
 	rect.w = image->getWidth();
 
 	SDL_Point pivot = { (rect.h / 2), (rect.w / 2) };
+
+	if (origin) {
+		pivot = *origin;
+	}
 
 	SDL_RenderCopyEx(renderer, image->getTexture(), clip, &rect, angle, &pivot, flip); 
 }
@@ -50,6 +54,11 @@ void Window::draw_absolute(Image *image, SDL_Point location, SDL_Rect *clip, flo
 	rect.w = image->getWidth();
 	
 	SDL_RenderCopyEx(renderer, image->getTexture(), clip, &rect, angle, NULL, flip);
+}
+
+void Window::draw_scaled(Image *image, SDL_Point pivot, SDL_Rect location, SDL_Rect *clip , float angle, SDL_RendererFlip flip)
+{
+	SDL_RenderCopyEx(renderer, image->getTexture(), clip, &location, angle, &pivot, flip);
 }
 
 void Window::clear()
