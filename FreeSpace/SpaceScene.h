@@ -6,6 +6,7 @@
 #include "Celestial.h"
 #include "Player.h"
 #include "Starscape.h"
+#include "SolarSystem.h"
 
 class SpaceScene :
 	public Scene
@@ -35,7 +36,7 @@ public:
 	Celestial *getNearestCelestial();
 
 private:
-	std::deque<Celestial> *celestials;
+	SolarSystem *system;
 	SDL_Point displacement;
 	void initialize();
 	Starscape *starscape;

@@ -5,7 +5,7 @@ SpaceScene::SpaceScene(Window *window, Player *player) : Scene(window)
 {
 	displacement.x =
 	displacement.y = 0;
-	celestials = new std::deque<Celestial>();
+	system = new SolarSystem();
 	starscape = new Starscape(window, &displacement);
 	protagonist = player;
 	cursor_frames = 0;
@@ -25,12 +25,12 @@ SpaceScene::~SpaceScene(void)
 
 std::deque<Celestial> *SpaceScene::getCelestials()
 {
-	return celestials;
+	return system->getCelestials();
 }
 
 void SpaceScene::addCelestial(Celestial celestial)
 {
-	celestials->push_back(celestial);
+	system->addCelestial(celestial);
 }
 
 void SpaceScene::activateCursor()
@@ -149,7 +149,7 @@ void SpaceScene::render()
 		render_arrow(coordinates);
 
 	// celestials
-	for (std::deque<Celestial>::iterator it = begin(*celestials); it != end(*celestials); ++it) {
+	for (std::deque<Celestial>::iterator it = begin(*(system->getCelestials())); it != end(*(system->getCelestials())); ++it) {
 		render(*it);
 	}
 
@@ -191,5 +191,5 @@ Celestial *SpaceScene::getNearestCelestial()
 {
 	//TODO: find nearest celestial
 
-	return &(celestials->at(0));
+	return &(system->getCelestials()->at(0));
 }
