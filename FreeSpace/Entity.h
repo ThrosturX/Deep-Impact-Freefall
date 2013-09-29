@@ -1,11 +1,12 @@
 #pragma once
 
-#include <SDL2/SDL.h>
+
 #include <string>
 #include <cmath>
 #include <algorithm>
 #include <tuple>
 #include <vector>
+#include "SDL2/SDL.h"
 #include "Vector2D.h"
 #include "Image.h"
 
